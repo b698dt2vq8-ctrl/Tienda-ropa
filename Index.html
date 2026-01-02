@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModaHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+    <header class="header">
+    <nav class="navbar container">
+
+        <div class="logo menu-toggle" id="menuToggle">
+            <i class="fas fa-shopping-bag"></i>
+            <span>ModaHub</span>
+        </div>
+
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="searchInput"
+                placeholder="Buscar productos..."
+            >
+            <i class="fas fa-search"></i>
+        </div>
+
+        <div class="nav-icons">
+            <!-- ICONO DEL CARRITO -->
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+
+            <!-- OVERLAY -->
+            <div class="cart-overlay" id="cartOverlay"></div>
+
+            <!-- DRAWER DEL CARRITO -->
+            <aside class="cart-drawer" id="cartDrawer">
+
+                <!-- HEADER -->
+                <header class="cart-drawer-header">
+                    <h3>🛒 Tu carrito</h3>
+                    <span class="close-cart" id="closeCart">&times;</span>
+                </header>
+
+                <!-- LISTA DE PRODUCTOS -->
+                <div class="cart-items" id="cartItems">
+                
+                </div>
+
+                <!-- RESUMEN -->
+                <div class="cart-summary">
+                    <p>Total: <strong>$<span id="cartTotal">0</span></strong></p>
+                    <button class="whatsapp-btn">
+                        Enviar por WhatsApp
+                    </button>
+                </div>
+
+            </aside>
+
+            <!-- DRAWER WHATSAPP -->
+            <aside class="whatsapp-drawer" id="whatsappDrawer">
+  <!-- HEADER -->
+                <header class="whatsapp-header">
+                    <h3>📲 Enviar pedido</h3>
+                    <span class="close-whatsapp" id="closeWhatsapp">&times;</span>
+                </header>
+  <!-- FORMULARIO -->
+                <div class="whatsapp-content">
+    <!-- 1️⃣ ENTREGAR A -->
+                    <section class="wp-section">
+                        <h4>Entregar a:</h4>
+                        <input type="text" id="wpNombre" placeholder="Nombre completo">
+                        <input type="text" id="wpCI" placeholder="Carnet de identidad">
+                    </section>
+    <!-- 2️⃣ DIRECCIÓN -->
+                    <section class="wp-section">
+                        <h4>Dirección de entrega:</h4>
+                        <input type="text" id="wpDireccion" placeholder="Ej: Calle 23 entre 10 y 12">
+                        <input type="text" id="wpNumero" placeholder="Número de la casa">
+                    </section>
+
+    <!-- 3️⃣ MÉTODO DE PAGO -->
+                    <section class="wp-section">
+                        <h4>Método de pago:</h4>
+
+                        <label>
+                            <input type="radio" name="pago" value="Efectivo">
+                            Efectivo
+                        </label>
+
+                        <label>
+                            <input type="radio" name="pago" value="Transferencia">
+                            Transferencia
+                        </label>
+                    </section>
+
+    <!-- BOTÓN ENVIAR -->
+                    <button class="send-whatsapp" onclick="enviarWhatsappPedido()">
+                        Enviar pedido por WhatsApp
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+
+        <nav class="main-menu" id="mainMenu">
+            <ul class="menu-level-1">
+                <li><a href="#inicio">Inicio</a></li>
+
+                <li class="has-submenu">
+                    <span>Catálogo</span>
+                    <ul class="menu-level-2">
+
+                        <li class="has-submenu">
+                            <span>Hombre</span>
+                            <ul class="menu-level-3">
+                                <li><a href="#">Camisas</a></li>
+                                <li><a href="#">Pantalones</a></li>
+                                <li><a href="#">Abrigos</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="has-submenu">
+                            <span>Mujer</span>
+                            <ul class="menu-level-3">
+                                <li><a href="#">Vestidos</a></li>
+                                <li><a href="#">Blusas</a></li>
+                                <li><a href="#">Calzado</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="has-submenu">
+                            <span>Niños</span>
+                            <ul class="menu-level-3">
+                                <li><a href="#">Conjuntos</a></li>
+                                <li><a href="#">Camisetas</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+
+    </nav>
+
+    <section class="hero">
+        <h1>Moda para todos</h1>
+        <p>Ropa moderna para hombre, mujer y niños</p>
+        <button class="hero-btn">Ver colección</button>
+    </section>
+
+    <section class="categories">
+        <button class="category-btn" data-category="hombre">
+            <i class="fa-solid fa-person"></i>
+            Hombre
+        </button>
+
+        <button class="category-btn" data-category="mujer">
+            <i class="fa-solid fa-person-dress"></i>
+            Mujer
+        </button>
+
+        <button class="category-btn" data-category="nino">
+            <i class="fa-solid fa-child"></i>
+            Niños
+        </button>
+    </section>
+
+    <main class="products" id="products">
+        <article class="product" data-category="hombre" data-subcategory="pullovers">
+            <img id="img-h-pullovers1" src="images/Hombre/pullovers/H-PULLOVERS-1.jpg" alt="Pullover hombre negro" class="product-img">
+            <h3>Pullover Clásico Hombre</h3>
+            <p class="price">10.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-pullovers1', 'images/hombre/pullovers/H-PULLOVERS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color azul"
+                data-color="#1e3a8a"
+                onclick="cambiarImagen('img-h-pullovers1', 'images/hombre/pullovers/H-PULLOVERS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-pullovers1', 'images/hombre/pullovers/H-PULLOVERS-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="pullovers">
+            <img id="img-h-pullovers2" src="images/Hombre/pullovers/H-PULLOVERS-4.jpg" alt="Pullover hombre rojo" class="product-img">
+            <h3>Pullover de Homre de Textura Gruesa</h3>
+            <p class="price">12.00$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color rojo"
+                data-color="#d62828"
+                onclick="cambiarImagen('img-h-pullovers2', 'images/hombre/pullovers/H-PULLOVERS-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color gris"
+                data-color="#999"
+                onclick="cambiarImagen('img-h-pullovers2', 'images/hombre/pullovers/H-PULLOVERS-5.jpg'); setActiveColor(this)"></button>
+
+                <button class="color verde"
+                data-color="#16a34a"
+                onclick="cambiarImagen('img-h-pullovers2', 'images/hombre/pullovers/H-PULLOVERS-6.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="abrigos">
+            <img id="img-h-abrigo1" src="images/Hombre/abrigos/H-ABRIGOS-1.jpg" alt="Abrigo de hombre-1" class="product-img">
+            <h3>Abrigo de Hombre de Color Entero</h3>
+            <p class="price">21.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color gris"
+                data-color="#999"
+                onclick="cambiarImagen('img-h-abrigo1', 'images/hombre/abrigos/H-ABRIGOS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color carmelita"
+                data-color="#8b4513"
+                onclick="cambiarImagen('img-h-abrigo1', 'images/hombre/abrigos/H-ABRIGOS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-abrigo1', 'images/hombre/abrigos/H-ABRIGOS-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="abrigos">
+            <img id="img-h-abrigo2" src="images/Hombre/abrigos/H-ABRIGOS-3.jpg" alt="Abrigo de hombre con siper-1" class="product-img">
+            <h3>Abrigo de Hombre de Color Entero</h3>
+            <p class="price">21.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color gris-oscuro"
+                data-color="#4b5563"
+                onclick="cambiarImagen('img-h-abrigo2', 'images/hombre/abrigos/H-ABRIGOS-3.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-abrigo2', 'images/hombre/abrigos/H-ABRIGOS-4.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="abrigos">
+            <img id="img-h-abrigo3" src="images/Hombre/abrigos/H-ABRIGOS-6.jpg" alt="Abrigo de naylon de hombre-1 " class="product-img">
+            <h3>Abrigo de Naylon de Hombre de Color Entero</h3>
+            <p class="price">18.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-abrigo3', 'images/hombre/abrigos/H-ABRIGOS-6.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="camisas">
+            <img id="img-h-camisa1" src="images/Hombre/camisas/H-CAMISAS-1.jpg" alt="Camisa de hombre-1" class="product-img">
+            <h3>Camisa de Mangas Largas de Hombre Color Entero</h3>
+            <p class="price">14.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color rojo-vino"
+                data-color="#730404"
+                onclick="cambiarImagen('img-h-camisa1', 'images/hombre/camisas/H-CAMISAS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-camisa1', 'images/hombre/camisas/H-CAMISAS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-camisa1', 'images/hombre/camisas/H-CAMISAS-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="camisas">
+            <img id="img-h-camisa2" src="images/Hombre/camisas/H-CAMISAS-4.jpg" alt="Camisa de hombre-4" class="product-img">
+            <h3>Camisa de Mangas Cortas de Hombre Color Entero</h3>
+            <p class="price">10.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color rojo-vino"
+                data-color="#730404"
+                onclick="cambiarImagen('img-h-camisa2', 'images/hombre/camisas/H-CAMISAS-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-camisa2', 'images/hombre/camisas/H-CAMISAS-5.jpg'); setActiveColor(this)"></button>
+
+                <button class="color carmelita"
+                data-color="#8b4513"
+                onclick="cambiarImagen('img-h-camisa2', 'images/hombre/camisas/H-CAMISAS-6.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="camisas">
+            <img id="img-h-camisa3" src="images/Hombre/camisas/H-CAMISAS-7.jpg" alt="Camisa de hombre-7" class="product-img">
+            <h3>Camisa de Mangas Largas de Hombre</h3>
+            <p class="price">8.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro-blanco"
+                data-color="linear-gradient(to right, black 50%, white 50%)"
+                onclick="cambiarImagen('img-h-camisa3', 'images/hombre/camisas/H-CAMISAS-7.jpg'); setActiveColor(this)"></button>
+
+                <button class="color azul-blanco"
+                data-color="linear-gradient(to right, rgb(10, 5, 168) 50%, white 50%)"
+                onclick="cambiarImagen('img-h-camisa3', 'images/hombre/camisas/H-CAMISAS-8.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="pantalon">
+            <img id="img-h-pantalon1" src="images/Hombre/pantalon/H-PANTALON-1.jpg" alt="Pantalon de hombre tela-1" class="product-img">
+            <h3>Pantalón de Hombre de Tela Rígida</h3>
+            <p class="price">11.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>30</option>
+                <option>32</option>
+                <option>34</option>
+                <option>36</option>
+                <option>38</option>
+            </select>
+
+            <div class="colores">
+                <button class="color azul"
+                data-color="#1e90ff"
+                onclick="cambiarImagen('img-h-pantalon1', 'images/hombre/pantalon/H-PANTALON-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-pantalon1', 'images/hombre/pantalon/H-PANTALON-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color beich"
+                data-color="#e6d3b1"
+                onclick="cambiarImagen('img-h-pantalon1', 'images/hombre/pantalon/H-PANTALON-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="pantalon">
+            <img id="img-h-pantalon2" src="images/Hombre/pantalon/H-PANTALON-4.jpg" alt="Pantalon de hombre hilo-1" class="product-img">
+            <h3>Pantalón Elegante de Hombre</h3>
+            <p class="price">14.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>30</option>
+                <option>32</option>
+                <option>34</option>
+                <option>36</option>
+                <option>38</option>
+            </select>
+
+            <div class="colores">
+                <button class="color azul"
+                data-color="#1e90ff"
+                onclick="cambiarImagen('img-h-pantalon2', 'images/hombre/pantalon/H-PANTALON-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-pantalon2', 'images/hombre/pantalon/H-PANTALON-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="pantalon">
+            <img id="img-h-pantalon3" src="images/Hombre/pantalon/H-PANTALON-6.jpg" alt="Pantalon de hombre cuatro puerta-1" class="product-img">
+            <h3>Pantalón Cuatro Puerta Elastizado</h3>
+            <p class="price">12.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>30</option>
+                <option>32</option>
+                <option>34</option>
+                <option>36</option>
+                <option>38</option>
+            </select>
+
+            <div class="colores">
+                <button class="color beich"
+                data-color="#e6d3b1"
+                onclick="cambiarImagen('img-h-pantalon3', 'images/hombre/pantalon/H-PANTALON-6.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-pantalon3', 'images/hombre/pantalon/H-PANTALON-7.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="pantalon">
+            <img id="img-h-pantalon4" src="images/Hombre/pantalon/H-PANTALON-8.jpg" alt="Pantalon de hombre cuatro puerta-3" class="product-img">
+            <h3>Pantalón Cuatro Puerta Rígido</h3>
+            <p class="price">10.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>30</option>
+                <option>32</option>
+                <option>34</option>
+                <option>36</option>
+                <option>38</option>
+            </select>
+
+            <div class="colores">
+                <button class="color beich"
+                data-color="#e6d3b1"
+                onclick="cambiarImagen('img-h-pantalon4', 'images/hombre/pantalon/H-PANTALON-8.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="zapatos">
+            <img id="img-h-zapatos1" src="images/Hombre/zapatos/H-ZAPATOS-1.jpg" alt="Air Force 1-blancas" class="product-img">
+            <h3>Air Force 1</h3>
+            <p class="price">35.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>40</option>
+                <option>41</option>
+                <option>42</option>
+                <option>43</option>
+                <option>44</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-zapatos1', 'images/hombre/zapatos/H-ZAPATOS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-zapatos1', 'images/hombre/zapatos/H-ZAPATOS-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro-plateado"
+                data-color="linear-gradient(to right, black 50%, rgb(77, 76, 76) 50%)"
+                onclick="cambiarImagen('img-h-zapatos1', 'images/hombre/zapatos/H-ZAPATOS-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="zapatos">
+            <img id="img-h-zapatos2" src="images/Hombre/zapatos/H-ZAPATOS-2.jpg" alt="Pumas Slugg-blancas" class="product-img">
+            <h3>Pumas Slugg</h3>
+            <p class="price">30.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>40</option>
+                <option>41</option>
+                <option>42</option>
+                <option>43</option>
+                <option>44</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-zapatos2', 'images/hombre/zapatos/H-ZAPATOS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-zapatos2', 'images/hombre/zapatos/H-ZAPATOS-4.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="zapatos">
+            <img id="img-h-zapatos3" src="images/Hombre/zapatos/H-ZAPATOS-6.jpg" alt="Converse-blancos" class="product-img">
+            <h3>Converses Altos</h3>
+            <p class="price">27.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>40</option>
+                <option>41</option>
+                <option>42</option>
+                <option>43</option>
+                <option>44</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-zapatos3', 'images/hombre/zapatos/H-ZAPATOS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-zapatos3', 'images/hombre/zapatos/H-ZAPATOS-4.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="ropa-interior">
+            <img id="img-h-ropainterior1" src="images/Hombre/ropa interior/H-ROPA INTERIOR-1.jpg" alt="Calzoncillos-1" class="product-img">
+            <h3>Calzoncillos Calvin Klein</h3>
+            <p class="price">2.59$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-ropainterior1', 'images/hombre/ropa interior/H-ROPA INTERIOR-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-ropainterior1', 'images/hombre/ropa interior/H-ROPA INTERIOR-3.jpg'); setActiveColor(this)"></button>
+
+                <button class="color gris"
+                data-color="#999"
+                onclick="cambiarImagen('img-h-ropainterior1', 'images/hombre/ropa interior/H-ROPA INTERIOR-4.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="ropa-interior">
+            <img id="img-h-ropainterior2" src="images/Hombre/ropa interior/H-ROPA INTERIOR-2.jpg" alt="Calcetines-1" class="product-img">
+            <h3>Medias Nike</h3>
+            <p class="price">1.59$</p>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-ropainterior2', 'images/hombre/ropa interior/H-ROPA INTERIOR-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-ropainterior2', 'images/hombre/ropa interior/H-ROPA INTERIOR-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="accesorios">
+            <img id="img-h-accesorios1" src="images/Hombre/accesorios/H-ACCESORIO-1.jpg" alt="guantes nike-negros" class="product-img">
+            <h3>Guantes Nike de Tejidos</h3>
+            <p class="price">2.59$</p>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-accesorios1', 'images/hombre/accesorios/H-ACCESORIO-1.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="accesorios">
+            <img id="img-h-accesorios2" src="images/Hombre/accesorios/H-ACCESORIO-2.jpg" alt="reloj inteligente negro" class="product-img">
+            <h3>Apple Watch Serie 1</h3>
+            <p class="price">45.59$</p>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-accesorios2', 'images/hombre/accesorios/H-ACCESORIO-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-accesorios2', 'images/hombre/accesorios/H-ACCESORIO-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="accesorios">
+            <img id="img-h-accesorios3" src="images/Hombre/accesorios/H-ACCESORIO-4.jpg" alt="Gorra negra" class="product-img">
+            <h3>Gorra de Beisbol Enteriza</h3>
+            <p class="price">3.29$</p>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-accesorios3', 'images/hombre/accesorios/H-ACCESORIO-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-accesorios3', 'images/hombre/accesorios/H-ACCESORIO-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="hombre" data-subcategory="accesorios">
+            <img id="img-h-accesorios4" src="images/Hombre/accesorios/H-ACCESORIO-6.jpg" alt="Gorro negro" class="product-img">
+            <h3>Gorro Tejido</h3>
+            <p class="price">2.69$</p>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-h-accesorios4', 'images/hombre/accesorios/H-ACCESORIO-6.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-h-accesorios4', 'images/hombre/accesorios/H-ACCESORIO-7.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="abrigos">
+            <img id="img-m-abrigos1" src="images/Mujer/abrigos/M-ABRIGOS-1.jpg" alt="Abrigo Mujer Color Entero-1" class="product-img">
+            <h3>Abrigo de Color Entero </h3>
+            <p class="price">22.59$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color verde"
+                data-color="#16a34a"
+                onclick="cambiarImagen('img-m-abrigos1', 'images/Mujer/abrigos/M-ABRIGOS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-abrigos1', 'images/Mujer/abrigos/M-ABRIGOS-5.jpg'); setActiveColor(this)"></button>
+
+                <button class="color rosado"
+                data-color="#f472b6"
+                onclick="cambiarImagen('img-m-abrigos1', 'images/Mujer/abrigos/M-ABRIGOS-6.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="abrigos">
+            <img id="img-m-abrigos2" src="images/Mujer/abrigos/M-ABRIGOS-2.jpg" alt="Abrigo Mujer L.A" class="product-img">
+            <h3>Abrigo de Los Angeles California</h3>
+            <p class="price">19.59$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-abrigos2', 'images/Mujer/abrigos/M-ABRIGOS-2.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="abrigos">
+            <img id="img-m-abrigos3" src="images/Mujer/abrigos/M-ABRIGOS-3.jpg" alt="Abrigo Mujer con siper-1" class="product-img">
+            <h3>Abrigo de Color Entero con Ziper</h3>
+            <p class="price">19.59$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-abrigos3', 'images/Mujer/abrigos/M-ABRIGOS-3.jpg'); setActiveColor(this)"></button>
+
+                <button class="color beich"
+                data-color="#e6d3b1"
+                onclick="cambiarImagen('img-m-abrigos3', 'images/Mujer/abrigos/M-ABRIGOS-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-abrigos3', 'images/Mujer/abrigos/M-ABRIGOS-7.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="vestidos">
+            <img id="img-m-vestidos1" src="images/Mujer/vestidos/M-VESTIDOS-1.jpg" alt="Vestido corto-1" class="product-img">
+            <h3>Vestido Corto con Tirantes</h3>
+            <p class="price">14.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color rojo-vino"
+                data-color="#730404"
+                onclick="cambiarImagen('img-m-vestidos1', 'images/Mujer/vestidos/M-VESTIDOS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-vestidos1', 'images/Mujer/vestidos/M-VESTIDOS-6.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="vestidos">
+            <img id="img-m-vestidos2" src="images/Mujer/vestidos/M-VESTIDOS-2.jpg" alt="Vestido floral-1" class="product-img">
+            <h3>Vestido Floral</h3>
+            <p class="price">12.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+             <div class="colores">
+                <button class="color verde"
+                data-color="#16a34a"
+                onclick="cambiarImagen('img-m-vestidos2', 'images/Mujer/vestidos/M-VESTIDOS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color rojo"
+                data-color="#d62828"
+                onclick="cambiarImagen('img-m-vestidos2', 'images/Mujer/vestidos/M-VESTIDOS-7.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="vestidos">
+            <img id="img-m-vestidos3" src="images/Mujer/vestidos/M-VESTIDOS-3.jpg" alt="Vestido largo-1" class="product-img">
+            <h3>Vestido Largo Elegante</h3>
+            <p class="price">16.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-vestidos3', 'images/Mujer/vestidos/M-VESTIDOS-3.jpg'); setActiveColor(this)"></button>
+
+                <button class="color azul"
+                data-color="#1e90ff"
+                onclick="cambiarImagen('img-m-vestidos3', 'images/Mujer/vestidos/M-VESTIDOS-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-vestidos3', 'images/Mujer/vestidos/M-VESTIDOS-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="blusas">
+            <img id="img-m-blusas1" src="images/Mujer/blusas/M-BLUSAS-1.jpg" alt="Blusa corta-1" class="product-img">
+            <h3>Blusa Corta</h3>
+            <p class="price">4.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-blusas1', 'images/Mujer/blusas/M-BLUSAS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-blusas1', 'images/Mujer/blusas/M-BLUSAS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color carmelita"
+                data-color="#8b4513"
+                onclick="cambiarImagen('img-m-blusas1', 'images/Mujer/blusas/M-BLUSAS-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="blusas">
+            <img id="img-m-blusas2" src="images/Mujer/blusas/M-BLUSAS-4.jpg" alt="Blusa con espalda fuera-1" class="product-img">
+            <h3>Blusa con espalda al aire</h3>
+            <p class="price">4.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-blusas2', 'images/Mujer/blusas/M-BLUSAS-5.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-blusas2', 'images/Mujer/blusas/M-BLUSAS-4.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="blusas">
+            <img id="img-m-blusas3" src="images/Mujer/blusas/M-BLUSAS-6.jpg" alt="Blusa sin un hombro-1" class="product-img">
+            <h3>Blusa sin un hombro</h3>
+            <p class="price">4.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color verde"
+                data-color="#16a34a"
+                onclick="cambiarImagen('img-m-blusas3', 'images/Mujer/blusas/M-BLUSAS-6.jpg'); setActiveColor(this)"></button>
+
+                <button class="color rojo"
+                data-color="#d62828"
+                onclick="cambiarImagen('img-m-blusas3', 'images/Mujer/blusas/M-BLUSAS-7.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="zapatos">
+            <img id="img-m-zapatos1" src="images/Mujer/zapatos/M-ZAPATOS-1.jpg" alt="Adidas retro" class="product-img">
+            <h3>Adidas Retro</h3>
+            <p class="price">44.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>36</option>
+                <option>37</option>
+                <option>38</option>
+                <option>39</option>
+                <option>40</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro-blanco"
+                data-color="linear-gradient(to right, black 50%, white 50%)"
+                onclick="cambiarImagen('img-m-zapatos1', 'images/Mujer/zapatos/M-ZAPATOS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-zapatos1', 'images/Mujer/zapatos/M-ZAPATOS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color gris-blanco"
+                data-color="linear-gradient(to right, rgb(72, 70, 70) 50%, white 50%)"
+                onclick="cambiarImagen('img-m-zapatos1', 'images/Mujer/zapatos/M-ZAPATOS-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="zapatos">
+            <img id="img-m-zapatos2" src="images/Mujer/zapatos/M-ZAPATOS-4.jpg" alt="Tacones alto" class="product-img">
+            <h3>Tacones Altos</h3>
+            <p class="price">17.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>36</option>
+                <option>37</option>
+                <option>38</option>
+                <option>39</option>
+                <option>40</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-zapatos2', 'imagesg/Mujer/zapatos/M-ZAPATOS-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color rojo-vino"
+                data-color="#730404"
+                onclick="cambiarImagen('img-m-zapatos2', 'images/Mujer/zapatos/M-ZAPATOS-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="zapatos">
+            <img id="img-m-zapatos3" src="images/Mujer/zapatos/M-ZAPATOS-6.jpg" alt="Vans clasicos" class="product-img">
+            <h3>Vans Clásicos</h3>
+            <p class="price">34.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>36</option>
+                <option>37</option>
+                <option>38</option>
+                <option>39</option>
+                <option>40</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-zapatos3', 'images/Mujer/zapatos/M-ZAPATOS-6.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-zapatos3', 'images/Mujer/zapatos/M-ZAPATOS-7.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro-blanco"
+                data-color="linear-gradient(to right, black 50%, white 50%)"
+                onclick="cambiarImagen('img-m-zapatos3', 'images/Mujer/zapatos/M-ZAPATOS-8.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="zapatos">
+            <img id="img-m-zapatos4" src="images/Mujer/zapatos/M-ZAPATOS-10.jpg" alt="Botas con tacón" class="product-img">
+            <h3>Botas con Tacón</h3>
+            <p class="price">24.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>36</option>
+                <option>37</option>
+                <option>38</option>
+                <option>39</option>
+                <option>40</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-zapatos4', 'images/Mujer/zapatos/M-ZAPATOS-10.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-zapatos4', 'images/Mujer/zapatos/M-ZAPATOS-11.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="ropa-interior">
+            <img id="img-m-ropainterior1" src="images/Mujer/ropa interior/M-ROPA INTERIOR-1.jpg" alt="Bragas-1" class="product-img">
+            <h3>Bragas Calvin Klein</h3>
+            <p class="price">3.39$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color gris"
+                data-color="#999"
+                onclick="cambiarImagen('img-m-ropainterior1', 'images/Mujer/ropa interior/M-ROPA INTERIOR-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-ropainterior1', 'images/Mujer/ropa interior/M-ROPA INTERIOR-2.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="ropa-interior">
+            <img id="img-m-ropainterior2" src="images/Mujer/ropa interior/M-ROPA INTERIOR-3.jpg" alt="Ajustadores-1" class="product-img">
+            <h3>Ajustadores Calvin Klein</h3>
+            <p class="price">2.89$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-ropainterior2', 'images/Mujer/ropa interior/M-ROPA INTERIOR-3.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-ropainterior2', 'images/Mujer/ropa interior/M-ROPA INTERIOR-4.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="ropa-interior">
+            <img id="img-m-ropainterior3" src="images/Mujer/ropa interior/M-ROPA INTERIOR-5.jpg" alt="Ajustadores-2" class="product-img">
+            <h3>Ajustadores Nike</h3>
+            <p class="price">2.89$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-ropainterior3', 'images/Mujer/ropa interior/M-ROPA INTERIOR-5.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-ropainterior3', 'images/Mujer/ropa interior/M-ROPA INTERIOR-6.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="accesorios">
+            <img id="img-m-accesorios1" src="images/Mujer/accesorios/M-ACCESORIOS-1.jpg" alt="Reloj inteligente" class="product-img">
+            <h3>Apple Watch Serie 1</h3>
+            <p class="price">42.89$</p>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-accesorios1', 'images/Mujer/accesorios/M-ACCESORIOS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-accesorios1', 'images/Mujer/accesorios/M-ACCESORIOS-1.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="accesorios">
+            <img id="img-m-accesorios2" src="images/Mujer/accesorios/M-ACCESORIOS-3.jpg" alt="Joyeria" class="product-img">
+            <h3>Conjunto Elegante de Joyas</h3>
+            <p class="price">32.99$</p>
+
+            <div class="colores">
+                <button class="color dorado"
+                data-color="#a58607"
+                onclick="cambiarImagen('img-m-accesorios2', 'images/Mujer/accesorios/M-ACCESORIOS-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="accesorios">
+            <img id="img-m-accesorios3" src="images/Mujer/accesorios/M-ACCESORIOS-4.jpg" alt="Gafas" class="product-img">
+            <h3>Gafas de Sol</h3>
+            <p class="price">2.99$</p>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-accesorios3', 'imagesg/Mujer/accesorios/M-ACCESORIOS-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-accesorios3', 'images/Mujer/accesorios/M-ACCESORIOS-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="accesorios">
+            <img id="img-m-accesorios4" src="images/Mujer/accesorios/M-ACCESORIOS-6.jpg" alt="Gorros tejidos" class="product-img">
+            <h3>Gorros Tejidos</h3>
+            <p class="price">2.50$</p>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-accesorios4', 'images/Mujer/accesorios/M-ACCESORIOS-9.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-accesorios4', 'images/Mujer/accesorios/M-ACCESORIOS-6.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="mujer" data-subcategory="accesorios">
+            <img id="img-m-accesorios5" src="images/Mujer/accesorios/M-ACCESORIOS-7.jpg" alt="Guantes tejidos" class="product-img">
+            <h3>Guantes Tejidos</h3>
+            <p class="price">3.89$</p>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-m-accesorios5', 'images/Mujer/accesorios/M-ACCESORIOS-7.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-m-accesorios5', 'images/Mujer/accesorios/M-ACCESORIOS-8.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="conjunto">
+            <img id="img-n-conjunto1" src="images/Niños/conjunto/N-CONJUNTO-1.jpg" alt="Conjunto-1" class="product-img">
+            <h3>Conjunto Nike de 2 Piezas para Niños</h3>
+            <p class="price">12.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color blanco-negro"
+                data-color="linear-gradient(to right, black 50%, white 50%)"
+                onclick="cambiarImagen('img-n-conjunto1', 'images/Niños/conjunto/N-CONJUNTO-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-conjunto1', 'images/Niños/conjunto/N-CONJUNTO-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco-azul-claro"
+                data-color="linear-gradient(to right, white 50%, rgb(58, 55, 234) 50%)"
+                onclick="cambiarImagen('img-n-conjunto1', 'images/Niños/conjunto/N-CONJUNTO-3.jpg')"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="conjunto">
+            <img id="img-n-conjunto2" src="images/Niños/conjunto/N-CONJUNTO-4.jpg" alt="Conjunto-2" class="product-img">
+            <h3>Conjunto Jordan de 2 Piezas para Niños</h3>
+            <p class="price">16.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-conjunto2', 'images/Niños/conjunto/N-CONJUNTO-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color azul"
+                data-color="#1e90ff"
+                onclick="cambiarImagen('img-n-conjunto2', 'images/Niños/conjunto/N-CONJUNTO-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="camisetas">
+            <img id="img-n-camisetas1" src="images/Niños/camisetas/N-CAMISETAS-1.jpg" alt="Camisetas-1" class="product-img">
+            <h3>Camiseta de Niño de Minecraft</h3>
+            <p class="price">6.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-camisetas1', 'images/Niños/camisetas/N-CAMISETAS-1.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="camisetas">
+            <img id="img-n-camisetas2" src="images/Niños/camisetas/N-CAMISETAS-2.jpg" alt="Camisetas-2" class="product-img">
+            <h3>Camiseta de Niño de Jurassic World</h3>
+            <p class="price">6.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-camisetas2', 'images/Niños/camisetas/N-CAMISETAS-2.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="camisetas">
+            <img id="img-n-camisetas3" src="images/Niños/camisetas/N-CAMISETAS-3.jpg" alt="Camisetas-3" class="product-img">
+            <h3>Camiseta de Niño</h3>
+            <p class="price">4.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-camisetas3', 'images/Niños/camisetas/N-CAMISETAS-3.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-n-camisetas3', 'images/Niños/camisetas/N-CAMISETAS-4.jpg'); setActiveColor(this)"></button>
+
+                <button class="color beich"
+                data-color="#e6d3b1"
+                onclick="cambiarImagen('img-n-camisetas3', 'images/Niños/camisetas/N-CAMISETAS-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="abrigos">
+            <img id="img-n-abrigos1" src="images/Niños/abrigos/N-ABRIGOS-1.jpg" alt="Abrigos-1" class="product-img">
+            <h3>Abrigo Relleno de Piel para Niños</h3>
+            <p class="price">8.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-abrigos1', 'images/Niños/abrigos/N-ABRIGOS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color azul-oscuro"
+                data-color="#1e3a8a"
+                onclick="cambiarImagen('img-n-abrigos1', 'images/Niños/abrigos/N-ABRIGOS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color azul"
+                data-color="#1e90ff"
+                onclick="cambiarImagen('img-n-abrigos1', 'images/Niños/abrigos/N-ABRIGOS-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="abrigos">
+            <img id="img-n-abrigos2" src="images/Niños/abrigos/N-ABRIGOS-5.jpg" alt="Abrigos-2" class="product-img">
+            <h3>Chaleco sin Mangas para Niños</h3>
+            <p class="price">7.29$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-abrigos2', 'images/Niños/abrigos/N-ABRIGOS-5.jpg'); setActiveColor(this)"></button>
+
+                <button class="color azul-oscuro"
+                data-color="#1e3a8a"
+                onclick="cambiarImagen('img-n-abrigos2', 'images/Niños/abrigos/N-ABRIGOS-4.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="pantalon">
+            <img id="img-n-pantalon1" src="images/Niños/pantalon/N-PANTALON-3.jpg" alt="Pantalon-1" class="product-img">
+            <h3>Mono con Bolsillo en la Rodillas</h3>
+            <p class="price">10.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color gris-oscuro"
+                data-color="#4b5563"
+                onclick="cambiarImagen('img-n-pantalon1', 'images/Niños/pantalon/N-PANTALON-3.jpg'); setActiveColor(this)"></button>
+
+                <button class="color verde-oscuro"
+                data-color="verde-oscuro"
+                onclick="cambiarImagen('img-n-pantalon1', 'images/Niños/pantalon/N-PANTALON-4.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="pantalon">
+            <img id="img-n-pantalon2" src="images/Niños/pantalon/N-PANTALON-1.jpg" alt="Pantalon-2" class="product-img">
+            <h3>Mono Cuatro Puertas para Niños</h3>
+            <p class="price">12.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-pantalon2', 'images/Niños/pantalon/N-PANTALON-1.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="zapatos">
+            <img id="img-n-zapatos1" src="images/Niños/zapatos/N-ZAPATOS-2.jpg" alt="Zapatos-1" class="product-img">
+            <h3>Tenis Adidas</h3>
+            <p class="price">8.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+            </select>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-zapatos1', 'images/Niños/zapatos/N-ZAPATOS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-n-zapatos1', 'images/Niños/zapatos/N-ZAPATOS-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="zapatos">
+            <img id="img-n-zapatos2" src="images/Niños/zapatos/N-ZAPATOS-1.jpg" alt="Zapatos-2" class="product-img">
+            <h3>Tenis Tommy</h3>
+            <p class="price">8.99$</p>
+
+            <select name="talla">
+                <option value="">Seleccionar talla</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+                <option>24</option>
+                <option>25</option>
+            </select>
+
+            <div class="colores">
+                <button class="color azul-oscuro"
+                data-color="#1e3a8a"
+                onclick="cambiarImagen('img-n-zapatos2', 'images/Niños/zapatos/N-ZAPATOS-1.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="accesorios">
+            <img id="img-n-accesorios1" src="images/Niños/accesorios/N-ACCESORIOS-1.jpg" alt="Accesorios-1" class="product-img">
+            <h3>Juego de 3 Piezas de Niño</h3>
+            <p class="price">5.99$</p>
+
+            <div class="colores">
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-n-accesorios1', 'images/Niños/accesorios/N-ACCESORIOS-1.jpg'); setActiveColor(this)"></button>
+
+                <button class="color rosado"
+                data-color="#f472b6"
+                onclick="cambiarImagen('img-n-accesorios1', 'images/Niños/accesorios/N-ACCESORIOS-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="accesorios">
+            <img id="img-n-accesorios2" src="images/Niños/accesorios/N-ACCESORIOS-2.jpg" alt="Accesorios-2" class="product-img">
+            <h3>Gorra de Dinosaurio para Niños</h3>
+            <p class="price">2.99$</p>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-accesorios2', 'images/Niños/accesorios/N-ACCESORIOS-2.jpg'); setActiveColor(this)"></button>
+
+                <button class="color blanco"
+                data-color="#fff"
+                onclick="cambiarImagen('img-n-accesorios2', 'images/Niños/accesorios/N-ACCESORIOS-3.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="accesorios">
+            <img id="img-n-accesorios3" src="images/Niños/accesorios/N-ACCESORIOS-4.jpg" alt="Accesorios-3" class="product-img">
+            <h3>Audifonos de Spider-Man</h3>
+            <p class="price">4.99$</p>
+
+            <div class="colores">
+                <button class="color azul-rojo"
+                data-color="azul-rojo"
+                onclick="cambiarImagen('img-n-accesorios3', 'images/Niños/accesorios/N-ACCESORIOS-4.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+
+        <article class="product" data-category="nino" data-subcategory="accesorios">
+            <img id="img-n-accesorios4" src="images/Niños/accesorios/N-ACCESORIOS-5.jpg" alt="Accesorios-4" class="product-img">
+            <h3>Mochila de Tiburón</h3>
+            <p class="price">7.99$</p>
+
+            <div class="colores">
+                <button class="color negro"
+                data-color="#000"
+                onclick="cambiarImagen('img-n-accesorios4', 'images/Niños/accesorios/N-ACCESORIOS-5.jpg'); setActiveColor(this)"></button>
+            </div>
+
+            <button class="add-cart">Agregar al carrito</button>
+        </article>
+    </main>
+
+    <footer class="footer-container">
+        <div class="footer-section about">
+            <h3>Mi Tienda</h3>
+            <p>Bienvenido a nuestra tienda en línea, donde puedes encontrar los mejores productos al mejor precio.</p>
+        </div>
+    
+        <div class="footer-section links-contact">
+            <div class="links">
+                <h3>Enlaces</h3>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Productos</a></li>
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Contactar</a></li>
+                </ul>
+            </div>
+
+            <div class="contact">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>Dirección: Calle Ficticia 123</li>
+                    <li>Teléfono: 555-123-4567</li>
+                    <li>Email: info@mitienda.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="social-icons">
+            <h3>¡Síguenos!</h3>
+            <div class="social">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-linkedin"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    
+</body>
+</html>
