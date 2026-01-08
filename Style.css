@@ -541,7 +541,7 @@ img {
 
 .hero {
     background: 
-      url("images/hero.jpg") center / cover no-repeat;
+      url("../images/hero.jpg") center / cover no-repeat;
 
     color: var(--color-text-main);
     text-align: center;
